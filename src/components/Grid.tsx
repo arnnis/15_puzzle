@@ -18,26 +18,26 @@ const Grid = () => {
   const moveTile = (tile: ITile, index: number) => {
     // can go right
     if (tiles[index + 1] === null) {
-      // Alert.alert('it can', 'right');
       dispatch(exchangeTilePlace({from: index, to: index + 1}));
+      return;
     }
 
     // can go left
     if (tiles[index - 1] === null) {
-      // Alert.alert('it can', 'left');
       dispatch(exchangeTilePlace({from: index, to: index - 1}));
+      return;
     }
 
     // can go upward
     if (tiles[index - 4] === null) {
-      // Alert.alert('it can', 'top');
       dispatch(exchangeTilePlace({from: index, to: index - 4}));
+      return;
     }
 
     // can go downward
     if (tiles[index + 4] === null) {
-      // Alert.alert('it can', 'bottom');
       dispatch(exchangeTilePlace({from: index, to: index + 4}));
+      return;
     }
   };
 
