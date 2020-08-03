@@ -16,7 +16,8 @@ const Grid = () => {
     let tiles: (ITile | null)[] = [];
     tiles.push(null);
     for (let i = 0; i < 15; i++) {
-      tiles.push({title: (i + 1).toString(), position: i});
+      const isEven = i % 2 === 0;
+      tiles.push({title: (i + 1).toString(), position: i, isEven});
     }
 
     return shuffle(tiles);
@@ -36,24 +37,23 @@ const Grid = () => {
       exchangePlace(index, index - 1);
     }
 
+    if (!isInFarTopRow(index) && tiles[index - 4] === null) {
+      // Alert.alert('it can', 'top');
+      exchangePlace(index, index - 4);
+    }
+
     if (!isInFarBottomRow(index) && tiles[index + 4] === null) {
       // 0 => 4
       // 1 => 5
       // Alert.alert('it can', 'bottom');
       exchangePlace(index, index + 4);
     }
-
-    if (!isInFarTopRow(index) && tiles[index - 4] === null) {
-      // Alert.alert('it can', 'top');
-      exchangePlace(index, index - 4);
-    }
   };
 
   const isInFarRightColumn = (position: number) => (position + 1) % 4 === 0;
   const isInFarLeftColumn = (position: number) => position % 4 === 0;
-  const isInFarBottomRow = (position: number) => position > 11;
   const isInFarTopRow = (position: number) => position < 4;
-  const isNextEmptyInRow = (position: number) => {};
+  const isInFarBottomRow = (position: number) => position > 11;
 
   const exchangePlace = (index1: number, index2: number) => {
     let _tiles = [...tiles];
@@ -77,11 +77,12 @@ const styles = StyleSheet.create({
     width: GRID_SIZE,
     height: GRID_SIZE,
     marginHorizontal: 'auto',
-    backgroundColor: 'red',
+    backgroundColor: '#222B39',
     flexWrap: 'wrap',
     flexDirection: 'row',
     paddingLeft: GRID_PADDING,
     paddingTop: GRID_PADDING,
+    borderRadius: 5,
   },
 });
 

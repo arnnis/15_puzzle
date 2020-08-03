@@ -10,16 +10,18 @@ interface Props {
   onPress(tile: ITile | null, index: number): void;
 }
 
-const Tile: FC<Props> = ({tile, index, onPress}) => (
-  <TouchableOpacity
-    onPress={() => onPress(tile, index)}
-    style={[
-      styles.container,
-      {backgroundColor: tile ? 'yellow' : 'transparent'},
-    ]}>
-    <Text>{tile?.title}</Text>
-  </TouchableOpacity>
-);
+const Tile: FC<Props> = ({tile, index, onPress}) => {
+  return (
+    <TouchableOpacity
+      onPress={() => onPress(tile, index)}
+      style={[
+        styles.container,
+        {backgroundColor: tile ? '#fff' : 'transparent'},
+      ]}>
+      <Text style={styles.title}>{tile?.title}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -28,6 +30,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow',
     marginRight: TILE_MARGIN,
     marginBottom: TILE_MARGIN,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
   },
 });
 
