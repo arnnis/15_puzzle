@@ -1,9 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {ITile} from '../types';
-import {shuffle} from '../utils';
+import {shuffleArray} from '../utils';
 
 export type GameState = {
-  tiles: (ITile | null)[];
+  tiles: (ITile | null)[]; // null is the empty position in puzzle.
 };
 
 const initialState: GameState = {
@@ -16,12 +16,16 @@ const gameSlice = createSlice({
   reducers: {
     generateGame(state) {
       let tiles: (ITile | null)[] = [];
+
+      // add the empty position in puzzle
       tiles.push(null);
+
+      // add other tiles
       for (let i = 0; i < 15; i++) {
-        const isEven = i % 2 === 0;
-        tiles.push({title: (i + 1).toString(), position: i, isEven});
+        tiles.push({title: (i + 1).toString()});
       }
-      state.tiles = shuffle(tiles);
+
+      state.tiles = shuffleArray(tiles);
     },
     exchangeTilePlace(
       state,

@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import Tile from './Tile';
-import {ITile} from '../types';
 import {GRID_SIZE, GRID_PADDING} from '../consts';
 import {generateGame, exchangeTilePlace} from '../slices/game-slice';
 import {RootState} from '../store/configureStore';
@@ -15,7 +14,7 @@ const Grid = () => {
     dispatch(generateGame());
   }, []);
 
-  const moveTile = (tile: ITile, index: number) => {
+  const moveTile = (index: number) => {
     // can go right
     if (tiles[index + 1] === null) {
       dispatch(exchangeTilePlace({from: index, to: index + 1}));

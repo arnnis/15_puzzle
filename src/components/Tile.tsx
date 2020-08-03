@@ -7,13 +7,13 @@ import {TILE_SIZE, TILE_MARGIN} from '../consts';
 interface Props {
   tile: ITile | null;
   index: number;
-  onPress(tile: ITile | null, index: number): void;
+  onPress(index: number): void;
 }
 
 const Tile: FC<Props> = ({tile, index, onPress}) => {
   return (
     <TouchableOpacity
-      onPress={() => onPress(tile, index)}
+      onPress={() => onPress(index)}
       style={[
         styles.container,
         {backgroundColor: tile ? '#fff' : 'transparent'},
