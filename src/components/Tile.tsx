@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 import {ITile} from '../types';
 import {TILE_SIZE, TILE_MARGIN} from '../consts';
