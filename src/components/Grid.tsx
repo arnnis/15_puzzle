@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Dimensions, Alert} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Alert,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import Tile from './Tile';
 import {ITile} from '../types';
 import {GRID_SIZE, GRID_PADDING} from '../consts';
@@ -24,7 +31,6 @@ const Grid = () => {
   };
 
   const moveTile = (tile: ITile, index: number) => {
-    // Alert.alert('warn', index.toString());
     // can go right
     if (!isInFarRightColumn(index) && tiles[index + 1] === null) {
       // Alert.alert('it can', 'right');
@@ -37,14 +43,14 @@ const Grid = () => {
       exchangePlace(index, index - 1);
     }
 
+    // can go upward
     if (!isInFarTopRow(index) && tiles[index - 4] === null) {
       // Alert.alert('it can', 'top');
       exchangePlace(index, index - 4);
     }
 
+    // can go downward
     if (!isInFarBottomRow(index) && tiles[index + 4] === null) {
-      // 0 => 4
-      // 1 => 5
       // Alert.alert('it can', 'bottom');
       exchangePlace(index, index + 4);
     }
@@ -63,11 +69,22 @@ const Grid = () => {
     setTiles(_tiles);
   };
 
+  const handleShufflePress = () => {
+    setTiles(generateGame());
+  };
+
+  const renderShuffleButton = () => (
+    <TouchableOpacity style={styles.shuffleButton} onPress={handleShufflePress}>
+      <Text style={styles.shuffleButtonTitle}>Shuffle</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
       {tiles.map((tile, i) => (
         <Tile tile={tile} index={i} onPress={moveTile} />
       ))}
+      {renderShuffleButton()}
     </View>
   );
 };
@@ -75,7 +92,7 @@ const Grid = () => {
 const styles = StyleSheet.create({
   container: {
     width: GRID_SIZE,
-    height: GRID_SIZE,
+
     marginHorizontal: 'auto',
     backgroundColor: '#222B39',
     flexWrap: 'wrap',
@@ -83,6 +100,21 @@ const styles = StyleSheet.create({
     paddingLeft: GRID_PADDING,
     paddingTop: GRID_PADDING,
     borderRadius: 5,
+  },
+  shuffleButton: {
+    width: '40%',
+    height: 45,
+    backgroundColor: '#7D2323',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: GRID_PADDING,
+    marginTop: 5,
+  },
+  shuffleButtonTitle: {
+    color: '#fff',
+    fontSize: 17,
+    fontWeight: 'bold',
   },
 });
 
