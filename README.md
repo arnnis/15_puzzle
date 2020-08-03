@@ -8,4 +8,4 @@ To run the project follow [react-native getting started guide](https://reactnati
 
 ## Screenshot
 
-![](https://user-images.githubusercontent.com/61647712/89195869-a3648d80-d5be-11ea-9f4a-ffd0ec80055b.png)
+![](https://user-images.githubusercontent.com/61647712/89196310-487f6600-d5bf-11ea-8c8a-78e62b98a8ed.gif)
