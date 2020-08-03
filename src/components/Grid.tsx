@@ -16,7 +16,7 @@ const Grid = () => {
   const [tiles, setTiles] = useState<(ITile | null)[]>([]);
 
   useEffect(() => {
-    setTiles(generateGame());
+    generateGame();
   }, []);
 
   const generateGame = () => {
@@ -27,39 +27,34 @@ const Grid = () => {
       tiles.push({title: (i + 1).toString(), position: i, isEven});
     }
 
-    return shuffle(tiles);
+    setTiles(shuffle(tiles));
   };
 
   const moveTile = (tile: ITile, index: number) => {
     // can go right
-    if (!isInFarRightColumn(index) && tiles[index + 1] === null) {
+    if (tiles[index + 1] === null) {
       // Alert.alert('it can', 'right');
       exchangePlace(index, index + 1);
     }
 
     // can go left
-    if (!isInFarLeftColumn(index) && tiles[index - 1] === null) {
+    if (tiles[index - 1] === null) {
       // Alert.alert('it can', 'left');
       exchangePlace(index, index - 1);
     }
 
     // can go upward
-    if (!isInFarTopRow(index) && tiles[index - 4] === null) {
+    if (tiles[index - 4] === null) {
       // Alert.alert('it can', 'top');
       exchangePlace(index, index - 4);
     }
 
     // can go downward
-    if (!isInFarBottomRow(index) && tiles[index + 4] === null) {
+    if (tiles[index + 4] === null) {
       // Alert.alert('it can', 'bottom');
       exchangePlace(index, index + 4);
     }
   };
-
-  const isInFarRightColumn = (position: number) => (position + 1) % 4 === 0;
-  const isInFarLeftColumn = (position: number) => position % 4 === 0;
-  const isInFarTopRow = (position: number) => position < 4;
-  const isInFarBottomRow = (position: number) => position > 11;
 
   const exchangePlace = (index1: number, index2: number) => {
     let _tiles = [...tiles];
@@ -69,9 +64,7 @@ const Grid = () => {
     setTiles(_tiles);
   };
 
-  const handleShufflePress = () => {
-    setTiles(generateGame());
-  };
+  const handleShufflePress = generateGame;
 
   const renderShuffleButton = () => (
     <TouchableOpacity style={styles.shuffleButton} onPress={handleShufflePress}>
