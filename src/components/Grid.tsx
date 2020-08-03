@@ -41,7 +41,7 @@ const Grid = () => {
     }
   };
 
-  const handleShufflePress = generateGame;
+  const handleShufflePress = () => dispatch(generateGame());
 
   const renderShuffleButton = () => (
     <TouchableOpacity style={styles.shuffleButton} onPress={handleShufflePress}>
